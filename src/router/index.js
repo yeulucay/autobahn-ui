@@ -77,15 +77,41 @@ export const constantRouterMap = [
     ]
   },
   {
-    path: '/projects',
+    path: '/project',
     component: Layout,
-    redirect: '/projects',
+    redirect: '/project',
     children: [
       {
         path: '',
-        component: () => import('@/views/projects/index'),
-        name: 'Projects',
-        meta: { title: 'Projects', icon: 'documentation', noCache: true }
+        component: () => import('@/views/project/index'),
+        name: 'Project',
+        meta: { title: 'Project', icon: 'documentation', noCache: true }
+      }
+    ]
+  },
+  {
+    path: '/endpoint',
+    component: Layout,
+    redirect: '/endpoint',
+    children: [
+      {
+        path: '',
+        component: () => import('@/views/endpoint/index'),
+        name: 'Endpoint',
+        meta: { title: 'Endpoint', icon: 'documentation', noCache: true }
+      }
+    ]
+  },
+  {
+    path: '/enrichmentsource',
+    component: Layout,
+    redirect: '/enrichmentsource',
+    children: [
+      {
+        path: '',
+        component: () => import('@/views/enrichmentsource/index'),
+        name: 'Enrichment Source',
+        meta: { title: 'Enrichment Source', icon: 'documentation', noCache: true }
       }
     ]
   },

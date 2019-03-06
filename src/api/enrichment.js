@@ -7,3 +7,10 @@ export function getEnrichmentSourceList(projectId) {
     method: 'get'
   })
 }
+
+export function getFinalStorageList(projectId) {
+    return request({
+      url: '/finalstorage/list/' + projectId,
+      method: 'get'
+    })
+  }

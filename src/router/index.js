@@ -116,6 +116,19 @@ export const constantRouterMap = [
     ]
   },
   {
+    path: '/finalstorage',
+    component: Layout,
+    redirect: '/finalstorage',
+    children: [
+      {
+        path: '',
+        component: () => import('@/views/finalstorage/index'),
+        name: 'Final Storage',
+        meta: { title: 'Final Storage', icon: 'documentation', noCache: true }
+      }
+    ]
+  },
+  {
     path: '/documentation',
     component: Layout,
     redirect: '/documentation/index',

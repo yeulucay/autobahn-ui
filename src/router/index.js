@@ -103,6 +103,19 @@ export const constantRouterMap = [
     ]
   },
   {
+    path: '/finalstorage',
+    component: Layout,
+    redirect: '/finalstorage',
+    children: [
+      {
+        path: '',
+        component: () => import('@/views/finalstorage/index'),
+        name: 'Final Storage',
+        meta: { title: 'Final Storage', icon: 'documentation', noCache: true }
+      }
+    ]
+  },
+  {
     path: '/enrichmentsource',
     component: Layout,
     redirect: '/enrichmentsource',
@@ -116,15 +129,15 @@ export const constantRouterMap = [
     ]
   },
   {
-    path: '/finalstorage',
+    path: '/enrichment',
     component: Layout,
-    redirect: '/finalstorage',
+    redirect: '/enrichment',
     children: [
       {
         path: '',
-        component: () => import('@/views/finalstorage/index'),
-        name: 'Final Storage',
-        meta: { title: 'Final Storage', icon: 'documentation', noCache: true }
+        component: () => import('@/views/enrichment/index'),
+        name: 'Enrichment',
+        meta: { title: 'Enrichment', icon: 'documentation', noCache: true }
       }
     ]
   },

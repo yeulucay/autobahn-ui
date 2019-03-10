@@ -20,6 +20,13 @@
         <el-table-column prop="endPointTypeCode" label="End Point"/>
         <el-table-column prop="enrichmentSourceTypeCode" label="Enrichment Source"/>
         <el-table-column prop="finalStorageTypeCode" label="Final Storage"/>
+        <el-table-column label="Action">
+          <template slot-scope="scope">
+            <el-button
+              size="mini"
+              @click="getDeatil(scope.row.id)">Detail</el-button>
+          </template>
+        </el-table-column>
       </el-table>
     </el-row>
   </div>
@@ -31,6 +38,9 @@ import {getProjectList} from '@/api/project'
 export default {
   name: 'enrichmentsource',
   components: {},
+  props:{
+    //selectedProject:{type:Number}
+  },
   data() {
     return {
       item: 0,
@@ -59,6 +69,13 @@ export default {
         if(response.data){
           this.enrichmentList = response.data
         }
+      })
+    },
+    getDeatil(enrichmentId){
+      let path = '/enrichment/detail/' + enrichmentId
+      //this.$router.params.projectId = this.projectId
+      this.$router.replace({
+        path: path
       })
     }
   }

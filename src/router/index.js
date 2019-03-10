@@ -138,6 +138,14 @@ export const constantRouterMap = [
         component: () => import('@/views/enrichment/index'),
         name: 'Enrichment',
         meta: { title: 'Enrichment', icon: 'documentation', noCache: true }
+        
+      },
+      {
+        path: 'detail/:enrichmentId',
+        component: () => import('@/views/enrichment/detail'),
+        name: 'Enrichment Detail',
+        meta: { title: 'Enrichment Detail', icon: 'documentation', noCache: true },
+        hidden: true
       }
     ]
   },

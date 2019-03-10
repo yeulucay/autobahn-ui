@@ -1,6 +1,13 @@
 import request from '@/utils/request'
 
 
+export function getEnrichmentById(enrichmentId) {
+  return request({
+    url: '/enrichment/' + enrichmentId,
+    method: 'get'
+  })
+}
+
 export function getEnrichmentList(projectId) {
   return request({
     url: '/enrichment/list/' + projectId,

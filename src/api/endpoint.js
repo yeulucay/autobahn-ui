@@ -7,3 +7,10 @@ export function getEndpointList(projectId) {
     method: 'get'
   })
 }
+
+export function getEndpointTypes() {
+  return request({
+    url: '/endpoints/type/list/',
+    method: 'get'
+  })
+}

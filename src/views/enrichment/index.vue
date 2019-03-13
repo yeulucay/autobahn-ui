@@ -18,6 +18,7 @@
         :data="enrichmentList">
         <el-table-column prop="name" label="Name"/>
         <el-table-column prop="endPointTypeCode" label="End Point"/>
+        <el-table-column prop="dataTypeCode" label="Data Type"/>
         <el-table-column prop="enrichmentSourceTypeCode" label="Enrichment Source"/>
         <el-table-column prop="finalStorageTypeCode" label="Final Storage"/>
         <el-table-column label="Action">

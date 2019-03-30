@@ -38,6 +38,12 @@ export default {
         return []
       }
     }
+  },
+  created(){
+    console.log('girdi')
+    console.log(this.list)
+    console.log(this.options)
+
   }
 }
 </script>

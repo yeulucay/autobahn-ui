@@ -28,3 +28,24 @@ export function getFinalStorageList(projectId) {
       method: 'get'
     })
   }
+
+export function getDataTypeList() {
+  return request({
+    url: '/commons/datatypes',
+    method: 'get'
+  })
+}
+
+export function getEnrichmentSourceTables(sourceId) {
+  return request({
+    url: '/enrichmentsource/table/list/' + sourceId,
+    method: 'get'
+  })
+}
+
+export function getEnrichmentSourceColumns(sourceId, columnName) {
+  return request({
+    url: '/enrichmentsource/column/list/' + sourceId + "/" + columnName,
+    method: 'get'
+  })
+}

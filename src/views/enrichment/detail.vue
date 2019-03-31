@@ -371,8 +371,17 @@ export default {
         model.columnNames.forEach(col => {
           const extColName = model.selectedTable + "." + col;
           if (this.totalList[i].all.indexOf(extColName) < 0) {
-            this.totalList[i].all.push(extColName);
+            this.totalList[i].all.push(extColName)
           }
+        });
+        model.joinModel.forEach(jmodel => {
+          console.log(jmodel.joinDestColumns)
+          jmodel.joinDestColumns.forEach(jcol => {
+            const jExtColName = jmodel.joinDestTable + '.' + jcol
+            if (this.totalList[i].all.indexOf(jExtColName) < 0) {
+              this.totalList[i].all.push(jExtColName)
+            }
+          });
         });
       }
     }

@@ -159,21 +159,17 @@
       </el-tab-pane>
       <el-tab-pane label="Enrichment Data">
         <span class="label">Select Final Storage Columns:</span>
-          <br>
+        <br>
         <el-row class="row-margin" v-for="(list, i) in totalList" v-bind:key="i">
+          <el-checkbox @change="deneme" v-model="list.checked" :label="list.value"></el-checkbox>
 
-            <el-checkbox @change="deneme" v-model="list.checked" :label="list.value"></el-checkbox>
-
-<!-- 
+          <!-- 
           <el-row class="row-margin span-item" v-for="item in list.all" v-bind:key="item">
             <el-checkbox @change="onEnrichmentDataSelected" label="item"></el-checkbox>
-          </el-row> -->
-        
+          </el-row>-->
         </el-row>
       </el-tab-pane>
-      <el-tab-pane label="">
-
-      </el-tab-pane>
+      <el-tab-pane label></el-tab-pane>
     </el-tabs>
   </div>
 </template>
@@ -226,12 +222,27 @@ export default {
     this.getDataTypes();
   },
   methods: {
-    saveEnrichment(){
-      console.log(this.totalColumnList)
-    },
-    cancelEnrichment(){
+    saveEnrichment() {
+      var data = {};
 
+      this.enrichmentModel.forEach(enrModel => {
+        delete enrModel.columnNames; // delete columnNames from attrs.
+        delete enrModel.selectedAttr;
+        if (enrModel.joinModel) {
+          enrModel.joinModel.forEach(jModel => {
+            delete jModel.joinDestColumns;
+            delete jModel.joinSourceColumns;
+          });
+        }
+      });
+      data["matchModel"] = this.enrichmentModel;
+      data["selectedColumnList"] = this.totalList;
+
+      console.log(data);
+
+      //TODO: data'yi db'ye kaydet (stringify)
     },
+    cancelEnrichment() {},
     addJoinModel(i) {
       this.enrichmentModel[i].joinModel.push({
         joinSourceTable: "",
@@ -244,6 +255,7 @@ export default {
     },
     closeMatch(i) {
       this.enrichmentModel.splice(i, 1);
+      this.organizeTotalSelectedColumnList();
     },
     addEnrichment() {
       this.enrichmentModel.push({
@@ -252,9 +264,7 @@ export default {
         sourceAttrNames: [],
         matchedAttrList: [],
         matchedColumnList: [],
-        availableTables: [],
-        joinModel: [],
-        enrichmentColumnList: []
+        joinModel: []
       });
       // this.totalList.push({
       //   all:[],
@@ -351,10 +361,6 @@ export default {
       );
     },
     onJoinTableChange(i, j, isSource) {
-      console.log(i);
-      console.log(j);
-      console.log(isSource);
-
       var colName = "";
       if (isSource) {
         colName = this.enrichmentModel[i].joinModel[j].joinSourceTable;
@@ -381,30 +387,28 @@ export default {
           // if (this.totalList[i].all.indexOf(extColName) < 0) {
           //   this.totalList[i].all.push(extColName)
           // }
-          this.totalList.push({"value":extColName, "checked":false})
+          this.totalList.push({ value: extColName, checked: false });
         });
         model.joinModel.forEach(jmodel => {
-          console.log(jmodel.joinDestColumns)
+          console.log(jmodel.joinDestColumns);
           jmodel.joinDestColumns.forEach(jcol => {
-            const jExtColName = jmodel.joinDestTable + '.' + jcol
+            const jExtColName = jmodel.joinDestTable + "." + jcol;
             // if (this.totalList[i].all.indexOf(jExtColName) < 0) {
             //   this.totalList[i].all.push(jExtColName)
             // }
-            this.totalList.push({"value":jExtColName, "checked":false})
+            this.totalList.push({ value: jExtColName, checked: false });
           });
         });
       }
-      console.log(this.totalList)
     }
   }
-  
 };
 </script>
 <style lang="scss">
 .row-margin {
   margin-top: 15px;
 }
-.span-item{
+.span-item {
   color: #333;
   margin-left: 10px;
 }
